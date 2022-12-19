@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # 100-safe_print_integer_err.py
-# Amos Mwongela Gabriel <amosmwongelah@gmail.com>
 
 import sys
 

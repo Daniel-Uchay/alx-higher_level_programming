@@ -1,6 +1,6 @@
 /*
  * File: 103-python.c
- * Auth: Amos Mwongela Gabriel
+ * Auth: Daniel Uche
  */
 
 #include <Python.h>
