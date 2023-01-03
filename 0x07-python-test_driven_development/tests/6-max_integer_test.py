@@ -1,69 +1,62 @@
 #!/usr/bin/python3
-"""Unittest for the max_integer module
-"""
+# 6-max_integer_test.py
+"""Unittests for max_integer([..])."""
 
 import unittest
 max_integer = __import__('6-max_integer').max_integer
 
 
 class TestMaxInteger(unittest.TestCase):
-    """TestCase for the max_integer function."""
+    """Define unittests for max_integer([..])."""
 
-    def test_regular(self):
-        """Test with a regular list of ints: should return the max result"""
-        l = [1, 2, 3, 4, 5]
-        result = max_integer(l)
-        self.assertEqual(result, 5)
+    def test_ordered_list(self):
+        """Test an ordered list of integers."""
+        ordered = [1, 2, 3, 4]
+        self.assertEqual(max_integer(ordered), 4)
 
-    def test_not_int(self):
-        """Test with a list of non-ints and ints:
-        should raise a TypeError exception"""
-        l = ["a", "b", 9]
-        self.assertRaises(TypeError, max_integer, l)
+    def test_unordered_list(self):
+        """Test an unordered list of integers."""
+        unordered = [1, 2, 4, 3]
+        self.assertEqual(max_integer(unordered), 4)
 
-    def test_empty(self):
-        """Test with an empty list: should return None"""
-        l = []
-        result = max_integer(l)
-        self.assertEqual(result, None)
+    def test_max_at_begginning(self):
+        """Test a list with a beginning max value."""
+        max_at_beginning = [4, 3, 2, 1]
+        self.assertEqual(max_integer(max_at_beginning), 4)
 
-    def test_negative(self):
-        """Test with a list of negative values: should return the max"""
-        l = [-2, -6, -1]
-        result = max_integer(l)
-        self.assertEqual(result, -1)
+    def test_empty_list(self):
+        """Test an empty list."""
+        empty = []
+        self.assertEqual(max_integer(empty), None)
 
-    def test_float(self):
-        """Test with a list of mixed ints and floats: should return the max"""
-        l = [3, 4.5, 2]
-        result = max_integer(l)
-        self.assertEqual(result, 4.5)
+    def test_one_element_list(self):
+        """Test a list with a single element."""
+        one_element = [7]
+        self.assertEqual(max_integer(one_element), 7)
 
-    def test_not_list(self):
-        """Test with a parameter that's not a list: should raise a TypeError"""
-        self.assertRaises(TypeError, max_integer, 7)
+    def test_floats(self):
+        """Test a list of floats."""
+        floats = [1.53, 6.33, -9.123, 15.2, 6.0]
+        self.assertEqual(max_integer(floats), 15.2)
 
-    def test_unique(self):
-        """Test with a list of one int: should return the value of this int"""
-        l = [45]
-        result = max_integer(l)
-        self.assertEqual(result, 45)
+    def test_ints_and_floats(self):
+        """Test a list of ints and floats."""
+        ints_and_floats = [1.53, 15.5, -9, 15, 6]
+        self.assertEqual(max_integer(ints_and_floats), 15.5)
 
-    def test_identical(self):
-        """Test with a list of identical values: should return the value"""
-        l = [8, 8, 8, 8, 8]
-        result = max_integer(l)
-        self.assertEqual(result, 8)
+    def test_string(self):
+        """Test a string."""
+        string = "Brennan"
+        self.assertEqual(max_integer(string), 'r')
 
-    def test_strings(self):
-        """Test with a list of strings: should return the first string"""
-        l = ["hi", "hello"]
-        result = max_integer(l)
-        self.assertEqual(result, "hi")
+    def test_list_of_strings(self):
+        """Test a list of strings."""
+        strings = ["Brennan", "is", "my", "name"]
+        self.assertEqual(max_integer(strings), "name")
 
-    def test_none(self):
-        """Test with a None as parameter: should raise a TypeError"""
-        self.assertRaises(TypeError, max_integer, None)
+    def test_empty_string(self):
+        """Test an empty string."""
+        self.assertEqual(max_integer(""), None)
 
 if __name__ == '__main__':
     unittest.main()
