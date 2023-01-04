@@ -139,4 +139,3 @@ Test: feed it Nan:
 
 	>>> matrix_mul([[42]], [[float('nan')]])
 	[[nan]]
-
