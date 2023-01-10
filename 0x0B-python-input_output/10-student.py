@@ -3,7 +3,6 @@
 Creates a Student class.
 """
 
-
 class Student:
     """Class that defines a student.
     Public attributes:
