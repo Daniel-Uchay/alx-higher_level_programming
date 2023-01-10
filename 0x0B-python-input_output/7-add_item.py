@@ -1,25 +1,26 @@
 #!/usr/bin/python3
-"""Module 9-add_item.
-Adds all arguments to a Python list,
-and then save them to a file.
+"""This script that adds all arguments
+to a Python list, and then save them to a file
 """
 
+
 import sys
-import json
-import os.path
+from os import path
+"""Import the json module and sys module"""
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+"""Import the save to json file function"""
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+"""Import the save to json file function"""
 
-save_to_json_file = __import__("7-save_to_json_file").save_to_json_file
-load_from_json_file = __import__("8-load_from_json_file").load_from_json_file
+ret_list = []
 
-my_file = 'add_item.json'
+if path.isfile("add_item.json") is False:
+    save_to_json_file(ret_list, "add_item.json")
 
-my_list = []
+ret_list = load_from_json_file("add_item.json")
 
-if os.path.exists(my_file) and os.path.getsize(my_file) > 0:
-    my_list = load_from_json_file(my_file)
+if sys.argv[1:]:
+    for i in sys.argv[1:]:
+        ret_list.append(i)
 
-if len(sys.argv) > 1:
-    for elem in sys.argv[1:]:
-        my_list.append(elem)
-
-save_to_json_file(my_list, my_file)
+save_to_json_file(ret_list, "add_item.json")
