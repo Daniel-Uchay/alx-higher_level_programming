@@ -29,3 +29,10 @@ class Student:
                 return new_dict
 
         return self.__dict__
+
+    def reload_from_json(self, json):
+        """
+            replaces all attributes of the Student instance
+        """
+        for i in json:
+            self.__dict__[i] = json[i]
