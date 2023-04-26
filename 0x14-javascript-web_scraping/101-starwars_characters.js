@@ -1,20 +1,31 @@
-#!/usr/bin/node
-const request = require('request');
-const url = 'https://swapi.co/api/films/' + process.argv[2];
-request(url, function (error, response, body) {
-  if (!error) {
-    let characters = JSON.parse(body).characters;
-    printCharacters(characters, 0);
-  }
-});
+const movieId = process.argv[2];
+const url = `https://swapi.dev/api/films/${movieId}/`;
 
-function printCharacters (characters, index) {
-  request(characters[index], function (error, response, body) {
-    if (!error) {
-      console.log(JSON.parse(body).name);
-      if (index + 1 < characters.length) {
-        printCharacters(characters, index + 1);
-      }
+fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Failed to retrieve movie data for ID ${movieId}`);
     }
+    return response.json();
+  })
+  .then(movieData => {
+    const characters = movieData.characters;
+    for (const characterUrl of characters) {
+      fetch(characterUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to retrieve character data for URL ${characterUrl}`);
+          }
+          return response.json();
+        })
+        .then(characterData => {
+          console.log(characterData.name);
+        })
+        .catch(error => {
+          console.error(error.message);
+        });
+    }
+  })
+  .catch(error => {
+    console.error(error.message);
   });
-}
