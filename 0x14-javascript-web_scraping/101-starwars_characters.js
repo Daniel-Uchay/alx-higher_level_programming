@@ -10,7 +10,8 @@ fetch(url)
   })
   .then(movieData => {
     const characters = movieData.characters;
-    for (const characterUrl of characters) {
+    for (let i = 0; i < characters.length; i++) {
+      const characterUrl = characters[i];
       fetch(characterUrl)
         .then(response => {
           if (!response.ok) {
